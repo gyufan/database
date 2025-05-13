@@ -67,6 +67,8 @@
 ## 使用案例
 
 ### 1. 使用者角色
+![image](https://github.com/aasd0/database/blob/main/user.jpg)
+
 在此系統中，使用者的使用過程包含以下幾個步驟：
 - **註冊帳號**：使用者需要在系統上註冊，這涉及使用者資料的儲存，對應資料庫中「Member」實體。
 - **登入系統**：使用者可以透過註冊的帳號密碼登入，對應「Member」與「Password」實體的存取。
@@ -74,6 +76,8 @@
 - **進行推薦**：使用者可以點擊推薦功能，對應「Restaurant」與「Recommendation」實體的關聯與新增。
 
 ### 2. 管理員角色
+![image](https://github.com/aasd0/database/blob/main/administrator.jpg)
+
 在此系統中，管理員的使用過程包含以下幾個步驟：
 - **查看會員數量**：管理員可以在系統上查看會員數量，這涉及對「Member」實體數量的存取。
 - **更新店家資訊**：管理員可以在系統上更新店家的相關資訊，這涉及對「Restaurant」與「Hours」實體的修改。
@@ -146,9 +150,61 @@
 | 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                          |
 |----------|------------|----------|----------|-------------------------------|
 | mId      | 會員 ID    | int      | N        | 參考 Member 的 mId           |
-| mPd      | 會員密碼   | string   | N        | 長度 12~20 的英數字混合      |
+| mPd      | 會員密碼   | string   | N        | 12~20 的英數字混合      |
 
-### 關聯
+### 五、ER Diagram
+![image](https://github.com/aasd0/database/blob/main/ER%20Diagram.jpg)
+
+#### 1. 會員 (Member) 資料表屬性
+- 會員ID (mId)
+- 會員帳號 (mAccount)
+- 姓名 (mName)
+- 電子郵件 (mEmail)
+- 連絡電話 (mPhone)
+- 常用地址 (mAddress)
+- 建立日期 (mCreateDate)
+
+#### 2. 喜好類別 (Category) 資料表屬性
+- 類別ID (cId)
+- 類別名稱 (cName)
+
+#### 3. 營業時間 (Hours) 資料表屬性
+- 營業時間ID (rHoursId)
+- 營業星期 (day)
+- 營業開始時 (start_hr)
+- 營業開始分 (start_min)
+- 營業結束時 (end_hr)
+- 營業結束分 (end_min)
+
+#### 4. 餐廳 (Restaurant) 資料表屬性
+- 店家ID (rId)
+- 店家名稱 (rName)
+- 店家地址 (rAddress)
+- 店家電話 (rPhone)
+- 營業時間ID (rHoursId)
+- 類別ID (cId)
+- Google Map 連結 (rLink)
+
+#### 5. 店家類別 (resCate) 資料表屬性
+- 店家ID (rId)
+- 類別ID (cId)
+
+#### 6. 會員喜好類別 (Preference) 資料表屬性
+- 會員ID (mId)
+- 類別ID (cId)
+
+#### 7. 推薦清單 (Recommendation) 資料表屬性
+- 推薦ID (recId)
+- 會員ID (mId)
+- 店家1 ID (rIdA)
+- 店家2 ID (rIdB)
+- 推薦日期 (recDate)
+
+#### 8. 會員密碼 (Password) 資料表屬性
+- 會員ID (mId)
+- 會員密碼 (mPd)
+
+#### 9. 關聯
 - 「Member」與「Password」實體有一對一 (1..1) 的關係，每個使用者僅有一組密碼。
 - 「Member」與「Preference」實體有一對一 (1..1) 的關係，每個使用者對應到一整組喜好。
 - 「Preference」與「Category」實體有一對多 (1..n) 的關係，每組使用者喜好對應到多個喜好類別。
