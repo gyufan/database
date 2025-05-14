@@ -94,7 +94,7 @@
 | 欄位名稱     | 說明         | 資料型態 | 是否為空 | 值域                              |
 |--------------|--------------|----------|----------|-----------------------------------|
 | mId          | 會員 ID 管理使用 | int      | N        | 從 1 開始遞增的整數              |
-| mAccount     | 會員帳號 登入使用 | string   | N        | 長度 6~20 的英數字混合 Unique Constraints |
+| mAccount     | 會員帳號 登入使用 | string   | N        | 長度 6~20 的英數字不含特殊符號，混合 Unique Constraints |
 | mName        | 姓名         | string   | N        | 長度 2~12 的文字                 |
 | mEmail       | 電子郵件     | string   | N        | 需有 @ 網域 Unique Constraints   |
 | mPhone       | 連絡電話     | string   | Y        | 09xxxxxxxx 以上數字              |
