@@ -99,7 +99,7 @@
 | mEmail       | 電子郵件     | string   | N        | 需有 @ 網域 Unique Constraints   |
 | mPhone       | 連絡電話     | string   | Y        | 09xxxxxxxx 以上數字              |
 | mAddress     | 常用地址     | string   | Y        | 長度 1~64 的文字                 |
-| mCreateDate  | 建立日期     | date     | N        | 日期格式                         |
+| mCreateDate  | 建立日期     | date     | N        | YYYY/MM/DD                         |
 
 #### 2. 喜好類別 (Category) 資料表
 | 欄位名稱 | 說明           | 資料型態 | 是否為空 | 值域                     |
@@ -147,7 +147,7 @@
 | mId      | 會員 ID    | int      | N        | 參考 Member 的 mId           |
 | rIdA     | 店家 1 ID  | int      | N        | 參考 Restaurant 的 rId       |
 | rIdB     | 店家 2 ID  | int      | N        | 參考 Restaurant 的 rId       |
-| recDate  | 推薦日期   | date     | N        | 日期格式                     |
+| recDate  | 推薦日期   | date     | N        | YYYY/MM/DD                     |
 
 #### 8. 會員密碼 (Password) 資料表
 | 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                          |
