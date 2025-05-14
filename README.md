@@ -126,7 +126,7 @@
 | rPhone     | 店家電話       | string   | Y        | 05622xxxx 以上號碼            |
 | rHoursId   | 營業時間 ID    | int      | Y        | 參考 Hours 的 rHoursId        |
 | cId        | 類別 ID        | int      | Y        | 參考 Category 的 cId          |
-| rLink      | Google Map 連結 | string   | Y        | Google Map 連結               |
+| rLink      | Google Map 連結 | string   | Y        | by Google Map 連結               |
 
 #### 5. 店家類別 (resCate) 資料表
 | 欄位名稱 | 說明     | 資料型態 | 是否為空 | 值域                       |
