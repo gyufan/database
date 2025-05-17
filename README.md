@@ -88,69 +88,63 @@
 ### 資料表
 
 #### 1. 會員 (Member) 資料表
-| 欄位名稱     | 說明         | 資料型態 | 是否為空 | 值域                              |
-|--------------|--------------|----------|----------|-----------------------------------|
-| mId          | 會員 ID 管理使用 | int      | N        | 從 1 開始遞增的整數              |
-| mAccount     | 會員帳號 登入使用 | string   | N        | 長度 6~20 的英數字混合 Unique Constraints |
-| mName        | 姓名         | string   | N        | 長度 2~12 的文字                 |
-| mEmail       | 電子郵件     | string   | N        | 需有 @ 網域 Unique Constraints   |
-| mPhone       | 連絡電話     | string   | Y        | 09xxxxxxxx 以上數字              |
-| mAddress     | 常用地址     | string   | Y        | 長度 1~64 的文字                 |
-| mCreateDate  | 建立日期     | date     | N        | 日期格式                         |
+| 欄位名稱     | 說明           | 資料型態         | 是否為空 | 值域                                                                 |
+|--------------|----------------|------------------|----------|----------------------------------------------------------------------|
+| mId          | 會員 ID        | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| mName        | 姓名           | VARCHAR(12)      | N        | 2~12 字元，限中文字或英文字母 |
+| mAccount     | 帳號           | VARCHAR(20)      | N        | 6~20 字元，限英文與數字組合       |
+| mEmail       | 電子郵件       | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
+| mPhone       | 手機           | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字，總共 10 位數 |
+| mAddress     | 地址           | VARCHAR(64)      | Y        | 最長 64 字元                                                |
+| mCreateDate  | 建立日期       | DATE             | N        | 格式為 yyyy-mm-dd，自動填入系統日期    |
 
 #### 2. 喜好類別 (Category) 資料表
-| 欄位名稱 | 說明           | 資料型態 | 是否為空 | 值域                     |
-|----------|----------------|----------|----------|--------------------------|
-| cId      | 喜好類別 ID    | int      | N        | 從 1 開始遞增的整數     |
-| cName    | 喜好類別名稱   | string   | N        | 長度 1~16 的文字        |
+| 欄位名稱 | 說明         | 資料型態     | 是否為空 | 值域                                                                 |
+|----------|--------------|--------------|----------|----------------------------------------------------------------------|
+| cId      | 類別 ID      | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| cName    | 類別名稱     | VARCHAR(16)  | N        | 1~16 字元，限中文字或英文字母                                                             |
 
 #### 3. 營業時間 (Hours) 資料表
-| 欄位名稱   | 說明                 | 資料型態 | 是否為空 | 值域                        |
-|------------|----------------------|----------|----------|-----------------------------|
-| rHoursId   | 營業時間 ID          | int      | N        | 從 1 開始遞增的整數        |
-| day        | 星期幾的營業時間     | string   | N        | 符合英文星期縮寫            |
-| start_hr   | 在幾點開始營業       | int      | Y        | 符合時間 24 小時制          |
-| start_min  | 在幾分開始營業       | int      | Y        | 符合時間的分鐘              |
-| end_hr     | 在幾點結束營業       | int      | Y        | 符合時間 24 小時制          |
-| end_min    | 在幾分結束營業       | int      | Y        | 符合時間的分鐘              |
+| 欄位名稱   | 說明                 | 資料型態     | 是否為空 | 值域                                                                 |
+|------------|----------------------|--------------|----------|----------------------------------------------------------------------|
+| rHoursId   | 營業時間 ID          | INT          | N        | 從 1 開始遞增的整數                                    |
+| day        | 星期                 | CHAR(3)      | N        |只能是固定的 Mon, Tue, Wed, Thu, Fri, Sat, Sun  這幾種          |
+| start_hr   | 開始小時             | TINYINT      | N        | 0~23（24 小時制），整數                                   |
+| start_min  | 開始分鐘             | TINYINT      | N        | 0~59，整數                                           |
+| end_hr     | 結束小時             | TINYINT      | N        | 0~23（24 小時制），整數                              |
+  | end_min    | 結束分鐘             | TINYINT      | N        | 0~59，整數                                   |
 
 #### 4. 餐廳 (Restaurant) 資料表
-| 欄位名稱   | 說明           | 資料型態 | 是否為空 | 值域                           |
-|------------|----------------|----------|----------|--------------------------------|
-| rId        | 店家 ID        | int      | N        | 從 1 開始遞增的整數           |
-| rName      | 店家名稱       | string   | N        | 長度 1~20 的文字              |
-| rAddress   | 店家地址       | string   | N        | 長度 1~64 的文字              |
-| rPhone     | 店家電話       | string   | Y        | 05622xxxx 以上號碼            |
-| rHoursId   | 營業時間 ID    | int      | Y        | 參考 Hours 的 rHoursId        |
-| cId        | 類別 ID        | int      | Y        | 參考 Category 的 cId          |
-| rLink      | Google Map 連結 | string   | Y        | Google Map 連結               |
+| 欄位名稱   | 說明           | 資料型態         | 是否為空 | 值域                                                                 |
+|------------|----------------|------------------|----------|----------------------------------------------------------------------|
+| rId        | 店家 ID        | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| rName      | 店名           | VARCHAR(30)      | N        | 1~30 字元，中文或英文皆可                                |
+| rAddress   | 地址           | VARCHAR(64)      | N        | 最長 64 字元                                             |
+| rPhone     | 店家電話       | VARCHAR(10)         | Y        |  056 開頭後面 6 個數字的虎尾市話 或 09 開頭後面 8 個數字的行動電話          |
+| rHoursId   | 營業時間 ID    | INT              | Y        | 參考 hours.rHoursId                     |
+| rLink      | GoogleMap連結  | VARCHAR(100)     | Y        | URL 格式，含 https://maps.app.goo.gl/ + 英文與數字的組合  |
 
-#### 5. 店家類別 (resCate) 資料表
-| 欄位名稱 | 說明     | 資料型態 | 是否為空 | 值域                       |
-|----------|----------|----------|----------|----------------------------|
-| rId      | 店家 ID  | int      | N        | 參考 Restaurant 的 rId    |
-| cId      | 類別 ID  | int      | N        | 參考 Category 的 cId      |
+#### 5. 店家類別對應表 (resCate)
+| 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                                              |
+|----------|------------|----------|----------|---------------------------------------------------|
+| rId      | 店家 ID    | INT      | N        | 參考 restaurant.rId |
+| cId      | 類別 ID    | INT      | N        | 參考 category.cId |
 
-#### 6. 會員喜好類別 (Preference) 資料表
-| 欄位名稱 | 說明     | 資料型態 | 是否為空 | 值域                       |
-|----------|----------|----------|----------|----------------------------|
-| mId      | 會員 ID  | int      | N        | 參考 Member 的 mId        |
-| cId      | 類別 ID  | int      | N        | 參考 Category 的 cId      |
+#### 6. 會員喜好類別表 (Preference)
+| 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                                              |
+|----------|------------|----------|----------|---------------------------------------------------|
+| mId      | 會員 ID    | INT      | N        | 參考 member.mId |
+| cId      | 類別 ID    | INT      | N        | 參考 category.cId |
 
-#### 7. 推薦清單 (Recommendation) 資料表
-| 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                          |
-|----------|------------|----------|----------|-------------------------------|
-| recId    | 推薦 ID    | int      | N        | 從 1 開始遞增的整數          |
-| mId      | 會員 ID    | int      | N        | 參考 Member 的 mId           |
-| rIdA     | 店家 1 ID  | int      | N        | 參考 Restaurant 的 rId       |
-| rIdB     | 店家 2 ID  | int      | N        | 參考 Restaurant 的 rId       |
-| recDate  | 推薦日期   | date     | N        | 日期格式                     |
+#### 7. 推薦清單表 (Recommendation)
+| 欄位名稱 | 說明         | 資料型態 | 是否為空 | 值域                                                                 |
+|----------|--------------|----------|----------|----------------------------------------------------------------------|
+| recId    | 推薦 ID      | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| mId      | 會員 ID      | INT      | N        | 參考 member.mId                   |
+| rIdA     | 推薦店家 A ID | INT      | N        | 參考 restaurant.rId       |
+| rIdB     | 推薦店家 B ID | INT      | N        | 參考 restaurant.rId         |
+| recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，自動填入當日日期   |
 
-#### 8. 會員密碼 (Password) 資料表
-| 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                          |
-|----------|------------|----------|----------|-------------------------------|
-| mId      | 會員 ID    | int      | N        | 參考 Member 的 mId           |
-| mPd      | 會員密碼   | string   | N        | 12~20 的英數字混合      |
 
 ### 五、ER Diagram
 ![image](https://github.com/aasd0/database/blob/main/ER%20Diagram.jpg)
@@ -200,11 +194,7 @@
 - 店家2 ID (rIdB)
 - 推薦日期 (recDate)
 
-#### 8. 會員密碼 (Password) 資料表屬性
-- 會員ID (mId)
-- 會員密碼 (mPd)
-
-#### 9. 關聯
+#### 8. 關聯
 - 「Member」與「Password」實體有一對一 (1..1) 的關係，每個使用者僅有一組密碼。
 - 「Member」與「Preference」實體有一對一 (1..1) 的關係，每個使用者對應到一整組喜好。
 - 「Preference」與「Category」實體有一對多 (1..n) 的關係，每組使用者喜好對應到多個喜好類別。
@@ -221,57 +211,46 @@
 ```sql
 -- 會員 (Member) 資料表
 CREATE TABLE Member (
-    mId INT NOT NULL AUTO_INCREMENT,
-    mName VARCHAR(12) NOT NULL,
-    mAccount VARCHAR(20) NOT NULL,
-    mEmail VARCHAR(50) NOT NULL,
-    mPhone CHAR(10),
+    mId INT AUTO_INCREMENT NOT NULL,
+    mName VARCHAR(12) NOT NULL CHECK (CHAR_LENGTH(mName) BETWEEN 2 AND 12), 
+    mAccount VARCHAR(20) NOT NULL CHECK (mAccount REGEXP '^[a-zA-Z0-9._]{6,20}$'),     // ._
+    mEmail VARCHAR(50) NOT NULL CHECK (mEmail REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
+    mPhone CHAR(10) CHECK (mPhone IS NULL OR mPhone REGEXP '^09[0-9]{8}$'),
     mAddress VARCHAR(64),
-    mCreateDate DATE NOT NULL,
+    mCreateDate DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (mId),
     UNIQUE (mAccount),
-    UNIQUE (mEmail),
-    CHECK (LENGTH(mAccount) >= 6 AND mAccount REGEXP '^[A-Za-z0-9]+$'),
-    CHECK (LENGTH(mName) >= 2),
-    CHECK (mEmail LIKE '%@%.%'),
-    CHECK (mPhone IS NULL OR mPhone REGEXP '^09[0-9]{8}$')
+    UNIQUE (mEmail)
 );
 
 -- 喜好類別 (Category) 資料表
 CREATE TABLE Category (
-    cId INT NOT NULL AUTO_INCREMENT,
-    cName VARCHAR(16) NOT NULL,
-    PRIMARY KEY (cId),
-    CHECK (LENGTH(cName) >= 1)
+    cId INT AUTO_INCREMENT NOT NULL,
+    cName VARCHAR(16) NOT NULL CHECK (CHAR_LENGTH(cName) BETWEEN 1 AND 16),   
+    PRIMARY KEY (cId)
 );
 
 -- 營業時間 (Hours) 資料表
-CREATE TABLE Hours (
-    rHoursId INT NOT NULL,
-    day CHAR(3) NOT NULL,
-    start_hr NUMERIC(2) CHECK (start_hr >= 0 AND start_hr <= 24),
-    start_min NUMERIC(2) CHECK (start_min >= 0 AND start_min < 60),
-    end_hr NUMERIC(2) CHECK (end_hr >= 0 AND end_hr <= 24),
-    end_min NUMERIC(2) CHECK (end_min >= 0 AND end_min < 60),
-    PRIMARY KEY (rHoursId, day, start_hr, start_min, end_hr, end_min),
-    CHECK (day IN ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'))
+CREATE TABLE hours( rHoursID
+INT NOT NULL,
+day CHAR(3) NOT NULL CHECK(day in('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')),
+start_hr NUMERIC(2) CHECK(start_hr >= 0 and start_hr <= 24), start_min
+NUMERIC(2) CHECK(start_min>=0 and start_min<60), end_hr
+NUMERIC(2)CHECK (end_hr >= 0 and end_hr <= 24), end_min
+NUMERIC(2)CHECK(end_min>=0 and end_min<60),
+PRIMARY KEY(rHoursID, day, start_hr, start_min, end_hr, end_min)
 );
 
 -- 餐廳 (Restaurant) 資料表
 CREATE TABLE Restaurant (
-    rId INT NOT NULL AUTO_INCREMENT,
-    rName VARCHAR(30) NOT NULL,
-    rAddress VARCHAR(64) NOT NULL,
-    rPhone CHAR(10),
+    rId INT AUTO_INCREMENT NOT NULL,
+    rName VARCHAR(30) NOT NULL CHECK (LENGTH(rName) >= 1),
+    rAddress VARCHAR(64) NOT NULL CHECK (LENGTH(rAddress) >= 1),
+    rPhone VARCHAR(10) CHECK (rPhone IS NULL OR rPhone REGEXP '^056[0-9]{6}|09[0-9]{8}$'),
     rHoursId INT,
-    cId INT,
-    rLink VARCHAR(100),
+    rLink VARCHAR(100) CHECK (rLink IS NULL OR rLink REGEXP '^https://maps\.app\.goo\.gl/.*$'),
     PRIMARY KEY (rId),
-    FOREIGN KEY (cId) REFERENCES Category(cId) ON DELETE SET NULL,
-    FOREIGN KEY (rHoursId) REFERENCES Hours(rHoursId) ON DELETE SET NULL,
-    CHECK (LENGTH(rName) >= 1),
-    CHECK (LENGTH(rAddress) >= 1),
-    CHECK (rPhone IS NULL OR rPhone REGEXP '^05622[0-9]{4}$')
+    FOREIGN KEY (rHoursId) REFERENCES Hours(rHoursId) ON DELETE SET NULL
 );
 
 -- 店家類別 (resCate) 資料表
@@ -305,14 +284,6 @@ CREATE TABLE Recommendation (
     FOREIGN KEY (rIdB) REFERENCES Restaurant(rId) ON DELETE CASCADE
 );
 
--- 會員密碼 (Password) 資料表
-CREATE TABLE Password (
-    mId INT NOT NULL,
-    mPd CHAR(20) NOT NULL,
-    PRIMARY KEY (mId),
-    FOREIGN KEY (mId) REFERENCES Member(mId) ON DELETE CASCADE,
-    CHECK (LENGTH(mPd) >= 12 AND mPd REGEXP '^[A-Za-z0-9]+$')
-);
 ```
 
 ### 範例資料
