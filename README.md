@@ -96,8 +96,8 @@
 | mId          | 會員 ID        | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
 | mName        | 姓名           | VARCHAR(12)      | N        | 2~12 字元，限中文字或英文字母 |
 | mAccount     | 帳號           | VARCHAR(20)      | N        | 6~20 字元，限英文與數字組合       |
-| mEmail       | 電子郵件       | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
-| mPhone       | 手機           | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字，總共 10 位數 |
+| mEmail       | 電子郵件       | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
+| mPhone       | 手機           | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字 |
 | mAddress     | 地址           | VARCHAR(64)      | Y        | 最長 64 字元的文字                                                |
 | mCreateDate  | 建立日期       | DATE             | N        | 格式為 yyyy-mm-dd，自動填入系統日期    |
 
@@ -229,7 +229,7 @@ CREATE TABLE Member (
     UNIQUE (mEmail),
     CHECK (LENGTH(mAccount) >= 6 AND mAccount REGEXP '^[A-Za-z0-9]+$'),
     CHECK (LENGTH(mName) >= 2),
-    CHECK (mEmail LIKE '%@%.%'),
+    CHECK (mEmail REGEXP '^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$'),
     CHECK (mPhone IS NULL OR mPhone REGEXP '^09[0-9]{8}$')
 );
 
@@ -267,7 +267,8 @@ CREATE TABLE Restaurant (
     FOREIGN KEY (rHoursId) REFERENCES Hours(rHoursId) ON DELETE SET NULL,
     CHECK (LENGTH(rName) >= 1),
     CHECK (LENGTH(rAddress) >= 1),
-    CHECK (rPhone IS NULL OR rPhone REGEXP '^05622[0-9]{4}$')
+    CHECK (rLink IS NULL OR rLink REGEXP '^https://maps\.app\.goo\.gl/.*$'),
+    CHECK (rPhone IS NULL OR rPhone REGEXP '^056[0-9]{6}|09[0-9]{8}$')
 );
 
 -- 店家類別 (resCate) 資料表
