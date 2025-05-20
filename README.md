@@ -196,10 +196,6 @@
 - 店家2 ID (rIdB)
 - 推薦日期 (recDate)
 
-#### 8. 會員密碼 (Password) 資料表屬性
-- 會員ID (mId)
-- 會員密碼 (mPd)
-
 #### 9. 關聯
 - 「Member」與「Password」實體有一對一 (1..1) 的關係，每個使用者僅有一組密碼。
 - 「Member」與「Preference」實體有一對一 (1..1) 的關係，每個使用者對應到一整組喜好。
@@ -302,14 +298,6 @@ CREATE TABLE Recommendation (
     FOREIGN KEY (rIdB) REFERENCES Restaurant(rId) ON DELETE CASCADE
 );
 
--- 會員密碼 (Password) 資料表
-CREATE TABLE Password (
-    mId INT NOT NULL,
-    mPd CHAR(20) NOT NULL,
-    PRIMARY KEY (mId),
-    FOREIGN KEY (mId) REFERENCES Member(mId) ON DELETE CASCADE,
-    CHECK (LENGTH(mPd) >= 12 AND mPd REGEXP '^[A-Za-z0-9]+$')
-);
 ```
 
 ### 範例資料
