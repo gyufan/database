@@ -99,7 +99,7 @@
 | mEmail       | 電子郵件       | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
 | mPhone       | 手機           | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字 |
 | mAddress     | 地址           | VARCHAR(64)      | Y        | 最長 64 字元的文字                                                |
-| mCreateDate  | 建立日期       | DATE             | N        | 格式為 yyyy-mm-dd    |
+| mCreateDate  | 建立日期       | DATE             | N        | 格式為 yyyy-mm-dd ，未設定時自動填入當前系統日期    |
 
 #### 2. 喜好類別 (Category) 資料表
 | 欄位名稱 | 說明         | 資料型態     | 是否為空 | 值域                                                                 |
@@ -146,7 +146,7 @@
 | mId      | 會員 ID      | INT      | N        | 參考 member.mId                   |
 | rIdA     | 推薦店家 A ID | INT      | N        | 參考 restaurant.rId       |
 | rIdB     | 推薦店家 B ID | INT      | N        | 參考 restaurant.rId         |
-| recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，自動填入當日日期   |
+| recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，未設定時自動填入當前系統日期   |
 
 ### 五、ER Diagram
 ![image](https://github.com/aasd0/database/blob/main/ER%20Diagram.jpg)
