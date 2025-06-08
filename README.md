@@ -219,14 +219,15 @@ CREATE TABLE Member (
     mEmail VARCHAR(50) NOT NULL,
     mPhone CHAR(10),
     mAddress VARCHAR(64),
-    mCreateDate DATE NOT NULL,
+    mCreateDate DATE NOT NULL DEFAULT CURRENT_DATE,
+    CHECK (mAccount REGEXP '^[a-zA-Z0-9._]{6,20}$'),
+    CHECK (CHAR_LENGTH(mName) >= 2),
+    CHECK (mEmail REGEXP '^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$'),
+    CHECK (mPhone IS NULL OR mPhone REGEXP '^09[0-9]{8}$'),
+    CHECK (mAddress IS NULL OR CHAR_LENGTH(mAddress) >= 1),
     PRIMARY KEY (mId),
     UNIQUE (mAccount),
-    UNIQUE (mEmail),
-    CHECK (LENGTH(mAccount) >= 6 AND mAccount REGEXP '^[A-Za-z0-9]+$'),
-    CHECK (LENGTH(mName) >= 2),
-    CHECK (mEmail REGEXP '^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,}$'),
-    CHECK (mPhone IS NULL OR mPhone REGEXP '^09[0-9]{8}$')
+    UNIQUE (mEmail)
 );
 
 -- 喜好類別 (Category) 資料表
@@ -234,7 +235,8 @@ CREATE TABLE Category (
     cId INT NOT NULL AUTO_INCREMENT,
     cName VARCHAR(16) NOT NULL,
     PRIMARY KEY (cId),
-    CHECK (LENGTH(cName) >= 1)
+    CHECK (CHAR_LENGTH(cName) >= 1)
+    UNIQUE (cName)
 );
 
 -- 營業時間 (Hours) 資料表
@@ -254,13 +256,13 @@ CREATE TABLE Restaurant (
     rId INT NOT NULL AUTO_INCREMENT,
     rName VARCHAR(30) NOT NULL,
     rAddress VARCHAR(64) NOT NULL,
-    rPhone CHAR(10),
+    rPhone VARCHAR(10),
     rHoursId INT,
     rLink VARCHAR(100),
     PRIMARY KEY (rId),
     FOREIGN KEY (rHoursId) REFERENCES Hours(rHoursId) ON DELETE SET NULL,
-    CHECK (LENGTH(rName) >= 1),
-    CHECK (LENGTH(rAddress) >= 1),
+    CHECK (CHAR_LENGTH(rName) >= 1),
+    CHECK (CHAR_LENGTH(rAddress) >= 1),
     CHECK (rLink IS NULL OR rLink REGEXP '^https://maps\.app\.goo\.gl/.*$'),
     CHECK (rPhone IS NULL OR rPhone REGEXP '^056[0-9]{6}|09[0-9]{8}$')
 );
@@ -300,7 +302,7 @@ CREATE TABLE Recommendation (
     mId INT NOT NULL,
     rIdA INT NOT NULL,
     rIdB INT NOT NULL,
-    recDate DATE NOT NULL,
+    recDate DATE NOT NULL DEFAULT CURRENT_DATE,
     PRIMARY KEY (recId),
     FOREIGN KEY (mId) REFERENCES Member(mId) ON DELETE CASCADE,
     FOREIGN KEY (rIdA) REFERENCES Restaurant(rId) ON DELETE CASCADE,
