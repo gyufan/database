@@ -266,6 +266,17 @@ CREATE TABLE Restaurant (
     CHECK (rLink IS NULL OR rLink REGEXP '^https://maps\.app\.goo\.gl/.*$'),
     CHECK (rPhone IS NULL OR rPhone REGEXP '^056[0-9]{6}|09[0-9]{8}$')
 );
+--觸發器 "" 換 null,
+DELIMITER //
+CREATE TRIGGER restaurant_before_insert
+BEFORE INSERT ON Restaurant
+FOR EACH ROW
+BEGIN
+    IF NEW.rPhone = "" THEN
+        SET NEW.rPhone = NULL;
+    END IF;
+END //
+DELIMITER ;
 
 -- 店家類別 (resCate) 資料表
 CREATE TABLE resCate (
