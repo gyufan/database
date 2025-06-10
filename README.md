@@ -19,7 +19,7 @@
 2. [系統需求說明](#系統需求說明)
 3. [使用案例](#使用案例)
 4. [資料概念層模型](#資料概念層模型)
-5. [ER Diagram](#ER)
+5. [ER Diagram](#ER_Diagram)
 6. [資料庫Schema](#資料庫schema)
 7. [View SQL](#view-sql)
 8. [使用者權限SQL](#使用者權限sql)
@@ -149,7 +149,7 @@
 | rIdB     | 推薦店家 B ID | INT      | N        | 參考 restaurant.rId         |
 | recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，未設定時自動填入當前系統日期   |
 
-## ER Diagram
+## ER_Diagram
 ![image](https://github.com/gyufan/database/blob/main/ER%20Diagram.jpg)
 
 #### 1. 會員 (Member) 資料表屬性
