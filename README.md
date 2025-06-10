@@ -149,7 +149,7 @@
 | rIdB     | 推薦店家 B ID | INT      | N        | 參考 restaurant.rId         |
 | recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，未設定時自動填入當前系統日期   |
 
-### ER Diagram
+## ER Diagram
 ![image](https://github.com/gyufan/database/blob/main/ER%20Diagram.jpg)
 
 #### 1. 會員 (Member) 資料表屬性
@@ -355,9 +355,8 @@ INSERT INTO Recommendation (mId, rIdA, rIdB, recDate) VALUES
 ```
 
 ## View SQL
-## 會員View
 
----
+### 會員View
 
 ### 1. 會員喜好 View：`user_preferences`
 
@@ -464,7 +463,7 @@ LEFT JOIN hours h ON r.rHoursID = h.rHoursID
 GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
 ```
 ---
-## 管理員View
+### 管理員View
 
 ### 6. 系統統計 View：`admin_statistics`
 
