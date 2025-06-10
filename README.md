@@ -178,7 +178,6 @@
 - 店家地址 (rAddress)
 - 店家電話 (rPhone)
 - 營業時間ID (rHoursId)
-- 類別ID (cId)
 - Google Map 連結 (rLink)
 
 #### 5. 店家類別 (resCate) 資料表屬性
@@ -196,8 +195,7 @@
 - 店家2 ID (rIdB)
 - 推薦日期 (recDate)
 
-#### 9. 關聯
-- 「Member」與「Password」實體有一對一 (1..1) 的關係，每個使用者僅有一組密碼。
+#### 8. 關聯
 - 「Member」與「Preference」實體有一對一 (1..1) 的關係，每個使用者對應到一整組喜好。
 - 「Preference」與「Category」實體有一對多 (1..n) 的關係，每組使用者喜好對應到多個喜好類別。
 - 「Preference」與「Recommendation」實體有一對多 (1..n) 的關係，每組使用者喜好可以產生多個推薦清單。
