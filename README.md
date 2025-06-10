@@ -317,7 +317,7 @@ CREATE TABLE Recommendation (
 INSERT INTO Member (mAccount, mName, mEmail, mPhone, mAddress, mCreateDate) VALUES
     ('yf0612', '郭俞汎', '41043104@nfu.edu.tw', '0900787955', '雲林縣虎尾鎮新生路74號', '2025-04-27'),
     ('pp9988', '無名氏', '94879487@gmail.com', '0987987987', '雲林縣虎尾鎮文化路87號', '2025-04-27'),
-    ('chen.meiling', '陳美玲', 'chen.meiling@gmail.com', '0921789584', '雲林縣虎尾鎮中正路376號', '2025-04-30');
+    ('chen.meiling', '陳美玲', 'chen.meiling@gmail.com', '0921789584', '雲林縣虎尾鎮中正路376號', '2025-05-13');
 
 -- 喜好類別 (Category) 範例資料
 INSERT INTO Category (cName) VALUES
@@ -348,9 +348,9 @@ INSERT INTO Preference (mId, cId) VALUES
 
 -- 推薦清單 (Recommendation) 範例資料
 INSERT INTO Recommendation (mId, rIdA, rIdB, recDate) VALUES
-    (2, 34, 48, '2025-04-30'),
-    (2, 5, 79, '2025-04-30'),
-    (5, 1, 49, '2025-05-01');
+    (2, 34, 48, '2025-05-01'),
+    (2, 5, 79, '2025-05-01'),
+    (5, 1, 49, '2025-05-02');
 
 ```
 
