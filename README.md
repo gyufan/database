@@ -361,7 +361,7 @@ INSERT INTO Password (mId, mPd) VALUES
 ```
 
 ## View SQL
-###使用者View
+### 使用者View
 
 ### 1. 會員喜好 View：`user_preferences`
 
@@ -468,7 +468,7 @@ LEFT JOIN hours h ON r.rHoursID = h.rHoursID
 GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
 ```
 ---
-###管理員View
+### 管理員View
 
 ### 6. 系統統計 View：`admin_statistics`
 
