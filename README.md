@@ -69,14 +69,14 @@
 
 ## 使用案例
 
-### 1. 使用者角色
+### 1. 會員角色
 ![image](https://github.com/aasd0/database/blob/main/user.jpg)
 
-在此系統中，使用者的使用過程包含以下幾個步驟：
-- **註冊帳號**：使用者需要在系統上註冊，這涉及使用者資料的儲存，對應資料庫中「Member」實體。
-- **登入系統**：使用者可以透過註冊的帳號密碼登入，對應「Member」與「Password」實體的存取。
-- **選擇喜好**：使用者可以自行選擇喜好類別，對應「Category」與「Preference」實體的關聯與修改。
-- **進行推薦**：使用者可以點擊推薦功能，對應「Restaurant」與「Recommendation」實體的關聯與新增。
+在此系統中，會員的使用過程包含以下幾個步驟：
+- **註冊帳號**：會員需要在系統上註冊，這涉及使用者資料的儲存，對應資料庫中「Member」實體。
+- **登入系統**：會員可以透過註冊的帳號密碼登入，對應「Member」與「Password」實體的存取。
+- **選擇喜好**：會員可以自行選擇喜好類別，對應「Category」與「Preference」實體的關聯與修改。
+- **進行推薦**：會員可以點擊推薦功能，對應「Restaurant」與「Recommendation」實體的關聯與新增。
 
 ### 2. 管理員角色
 ![image](https://github.com/aasd0/database/blob/main/administrator.jpg)
