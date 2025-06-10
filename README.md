@@ -363,21 +363,7 @@ INSERT INTO Password (mId, mPd) VALUES
 ## View SQL
 ### 使用者View
 
-### 1. 會員喜好 View：`user_preferences`
 
-**用途**：彙整會員的喜好類別。
-
-```sql
-SELECT 
-    m.mID,
-    m.mName,
-    m.mAccount,
-    GROUP_CONCAT(c.cName SEPARATOR ', ') AS preferences
-FROM member m
-LEFT JOIN preference p ON m.mID = p.mID
-LEFT JOIN category c ON p.cID = c.cID
-GROUP BY m.mID, m.mName, m.mAccount;
-```
 ---
 ### 2. 營業中餐廳 View：`open_restaurants`
 
@@ -482,6 +468,25 @@ SELECT
     (SELECT COUNT(*) FROM recommendation) AS total_recommendations;
 ```
 ---
+
+### 7. 會員喜好 View：`user_preferences`
+
+**用途**：彙整會員的喜好類別。
+
+```sql
+SELECT 
+    m.mID,
+    m.mName,
+    m.mAccount,
+    GROUP_CONCAT(c.cName SEPARATOR ', ') AS preferences
+FROM member m
+LEFT JOIN preference p ON m.mID = p.mID
+LEFT JOIN category c ON p.cID = c.cID
+GROUP BY m.mID, m.mName, m.mAccount;
+```
+
+---
+
 ## 使用者權限SQL
 
 ```sql
