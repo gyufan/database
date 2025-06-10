@@ -365,7 +365,7 @@ INSERT INTO Password (mId, mPd) VALUES
 
 
 ---
-### 2. 營業中餐廳 View：`open_restaurants`
+### 1. 營業中餐廳 View：`open_restaurants`
 
 **用途**：查詢目前時間仍在營業的餐廳。
 
@@ -388,7 +388,7 @@ AND (
 );
 ```
 ---
-### 3. 推薦候選餐廳 View：`recommendation_candidates`
+### 2. 推薦候選餐廳 View：`recommendation_candidates`
 
 **用途**：計算會員與餐廳間的喜好配對數量（供推薦邏輯使用）。
 
@@ -408,7 +408,7 @@ GROUP BY p.mID, r.rID, r.rName, r.rAddress, r.rPhone, r.rLink
 ORDER BY p.mID, matching_categories DESC;
 ```
 ---
-### 4. 推薦記錄 View：`recent_recommendations`
+### 3. 推薦記錄 View：`recent_recommendations`
 
 **用途**：顯示推薦歷史記錄與對應餐廳名稱。
 
@@ -429,7 +429,7 @@ ORDER BY rec.recDate DESC, rec.recID DESC;
 
 ---
 
-### 5. 餐廳詳情 View：`restaurant_details`
+### 4. 餐廳詳情 View：`restaurant_details`
 
 **用途**：整合餐廳的類別與營業時段顯示。
 
@@ -456,7 +456,7 @@ GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
 ---
 ### 管理員View
 
-### 6. 系統統計 View：`admin_statistics`
+### 5. 系統統計 View：`admin_statistics`
 
 **用途**：顯示會員總數、餐廳數、類別數與推薦記錄數。
 
@@ -469,7 +469,7 @@ SELECT
 ```
 ---
 
-### 7. 會員喜好 View：`user_preferences`
+### 6. 會員喜好 View：`user_preferences`
 
 **用途**：彙整會員的喜好類別。
 
