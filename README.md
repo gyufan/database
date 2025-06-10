@@ -467,7 +467,9 @@ LEFT JOIN category c ON rc.cID = c.cID
 LEFT JOIN hours h ON r.rHoursID = h.rHoursID
 GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
 ```
+---
 ###管理員View
+
 ### 6. 系統統計 View：`admin_statistics`
 
 **用途**：顯示會員總數、餐廳數、類別數與推薦記錄數。
