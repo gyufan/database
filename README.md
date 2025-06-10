@@ -19,7 +19,7 @@
 2. [系統需求說明](#系統需求說明)
 3. [使用案例](#使用案例)
 4. [資料概念層模型](#資料概念層模型)
-5. [ER Diagram](#ER Diagram)
+5. [ER Diagram](#ER)
 6. [資料庫Schema](#資料庫schema)
 7. [View SQL](#view-sql)
 8. [使用者權限SQL](#使用者權限sql)
