@@ -361,59 +361,125 @@ INSERT INTO Password (mId, mPd) VALUES
 ```
 
 ## View SQL
+###使用者View
 
-### 1. 進行推薦的View
-顯示根據使用者喜好推薦的餐廳，考慮當前日期的營業時間。
+### 1. 會員喜好 View：`user_preferences`
 
-```sql
-CREATE VIEW creRec AS
-WITH rd AS (
-    SELECT DISTINCT r.rName
-    FROM Restaurant AS r
-    JOIN Hours AS h ON h.rHoursId = r.rHoursId
-    JOIN resCate AS rc ON rc.rId = r.rId
-    JOIN Member AS m ON m.mId = p.mId
-    JOIN Preference AS p ON p.cId = rc.cId
-    JOIN Category AS c ON c.cId = p.cId
-    WHERE LEFT(DAYNAME(NOW()), 3) = h.day
-      AND SUBSTRING_INDEX(USER(), '@', 1) = m.mAccount
-    ORDER BY RAND()
-    LIMIT 2
-)
-SELECT DISTINCT r.rName, h.day, h.start_hr, h.start_min, h.end_hr, h.end_min
-FROM Restaurant AS r
-JOIN Hours AS h ON h.rHoursId = r.rHoursId
-JOIN resCate AS rc ON rc.rId = r.rId
-JOIN Member AS m ON m.mId = p.mId
-JOIN Preference AS p ON p.cId = rc.cId
-JOIN Category AS c ON c.cId = p.cId
-WHERE r.rName IN (SELECT rName FROM rd)
-  AND LEFT(DAYNAME(NOW()), 3) = h.day
-  AND SUBSTRING_INDEX(USER(), '@', 1) = m.mAccount
-ORDER BY r.rId, h.start_hr;
-```
-
-### 2. 查看使用者自選喜好的View
-顯示每個使用者選擇的類別。
+**用途**：彙整會員的喜好類別。
 
 ```sql
-CREATE VIEW mineFav AS
-SELECT m.mName, c.cName
-FROM Preference AS p
-JOIN Member AS m ON m.mId = p.mId
-JOIN Category AS c ON c.cId = p.cId
-WHERE SUBSTRING_INDEX(USER(), '@', 1) = m.mAccount;
+SELECT 
+    m.mID,
+    m.mName,
+    m.mAccount,
+    GROUP_CONCAT(c.cName SEPARATOR ', ') AS preferences
+FROM member m
+LEFT JOIN preference p ON m.mID = p.mID
+LEFT JOIN category c ON p.cID = c.cID
+GROUP BY m.mID, m.mName, m.mAccount;
 ```
+---
+### 2. 營業中餐廳 View：`open_restaurants`
 
-### 3. 管理員查看會員數量的View
-允許管理員查看註冊會員的總數。
+**用途**：查詢目前時間仍在營業的餐廳。
 
 ```sql
-CREATE VIEW MemberCount AS
-SELECT COUNT(mId) AS MemberCount
-FROM Member;
+SELECT DISTINCT
+    r.rID,
+    r.rName,
+    r.rAddress,
+    r.rPhone,
+    r.rLink
+FROM restaurant r
+JOIN hours h ON r.rHoursID = h.rHoursID
+WHERE h.day = LEFT(DAYNAME(NOW()), 3)
+AND (
+    (h.start_hr < HOUR(NOW()) OR 
+     (h.start_hr = HOUR(NOW()) AND h.start_min <= MINUTE(NOW())))
+    AND
+    (h.end_hr > HOUR(NOW()) OR 
+     (h.end_hr = HOUR(NOW()) AND h.end_min >= MINUTE(NOW())))
+);
+```
+---
+### 3. 推薦候選餐廳 View：`recommendation_candidates`
+
+**用途**：計算會員與餐廳間的喜好配對數量（供推薦邏輯使用）。
+
+```sql
+SELECT 
+    p.mID,
+    r.rID,
+    r.rName,
+    r.rAddress,
+    r.rPhone,
+    r.rLink,
+    COUNT(DISTINCT rc.cID) AS matching_categories
+FROM preference p
+JOIN resCate rc ON p.cID = rc.cID
+JOIN restaurant r ON rc.rID = r.rID
+GROUP BY p.mID, r.rID, r.rName, r.rAddress, r.rPhone, r.rLink
+ORDER BY p.mID, matching_categories DESC;
+```
+---
+### 4. 推薦記錄 View：`recent_recommendations`
+
+**用途**：顯示推薦歷史記錄與對應餐廳名稱。
+
+```sql
+SELECT 
+    rec.recID,
+    m.mName,
+    m.mAccount,
+    r1.rName AS restaurant_1,
+    r2.rName AS restaurant_2,
+    rec.recDate
+FROM recommendation rec
+JOIN member m ON rec.mID = m.mID
+JOIN restaurant r1 ON rec.rIDA = r1.rID
+JOIN restaurant r2 ON rec.rIDB = r2.rID
+ORDER BY rec.recDate DESC, rec.recID DESC;
 ```
 
+---
+
+### 5. 餐廳詳情 View：`restaurant_details`
+
+**用途**：整合餐廳的類別與營業時段顯示。
+
+```sql
+SELECT 
+    r.rID,
+    r.rName,
+    r.rAddress,
+    r.rPhone,
+    r.rLink,
+    GROUP_CONCAT(DISTINCT c.cName SEPARATOR ', ') AS categories,
+    GROUP_CONCAT(DISTINCT 
+        CONCAT(h.day, ' ', 
+               LPAD(h.start_hr, 2, '0'), ':', LPAD(h.start_min, 2, '0'), 
+               '-', 
+               LPAD(h.end_hr, 2, '0'), ':', LPAD(h.end_min, 2, '0'))
+        SEPARATOR '; ') AS business_hours
+FROM restaurant r
+LEFT JOIN resCate rc ON r.rID = rc.rID
+LEFT JOIN category c ON rc.cID = c.cID
+LEFT JOIN hours h ON r.rHoursID = h.rHoursID
+GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
+```
+###管理員View
+### 6. 系統統計 View：`admin_statistics`
+
+**用途**：顯示會員總數、餐廳數、類別數與推薦記錄數。
+
+```sql
+SELECT 
+    (SELECT COUNT(*) FROM member) AS total_members,
+    (SELECT COUNT(*) FROM restaurant) AS total_restaurants,
+    (SELECT COUNT(*) FROM category) AS total_categories,
+    (SELECT COUNT(*) FROM recommendation) AS total_recommendations;
+```
+---
 ## 使用者權限SQL
 
 ```sql
