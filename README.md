@@ -149,7 +149,7 @@
 | recDate  | 推薦日期     | DATE     | N        | 格式為 yyyy-mm-dd，未設定時自動填入當前系統日期   |
 
 ### 五、ER Diagram
-![image](https://github.com/gyufan/database/blob/main/ER.png)
+![image](https://github.com/gyufan/database/blob/main/ER%20Diagram.jpg)
 
 #### 1. 會員 (Member) 資料表屬性
 - 會員ID (mId)
