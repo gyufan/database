@@ -355,7 +355,7 @@ INSERT INTO Recommendation (mId, rIdA, rIdB, recDate) VALUES
 ```
 
 ## View SQL
-### 使用者View
+## 會員View
 
 ---
 
@@ -464,7 +464,7 @@ LEFT JOIN hours h ON r.rHoursID = h.rHoursID
 GROUP BY r.rID, r.rName, r.rAddress, r.rPhone, r.rLink;
 ```
 ---
-### 管理員View
+## 管理員View
 
 ### 6. 系統統計 View：`admin_statistics`
 
@@ -479,23 +479,35 @@ SELECT
 ```
 
 ---
-
 ## 使用者權限SQL
 
 ```sql
--- 建立使用者角色
-CREATE USER 'yf0612'@'%' IDENTIFIED BY '41043104';
-CREATE USER 'pp99886'@'%' IDENTIFIED BY '94879487';
+-- 1. 建立會員使用者帳號
+CREATE USER 'user_general'@'%' IDENTIFIED BY 'userpassword123';
 
--- 授予管理員權限
-GRANT ALL PRIVILEGES ON hfrs.* TO 'yf0612'@'%';
+-- 2. 會員使用者對 huwei_food 資料庫中的操作權限
+GRANT SELECT, INSERT, UPDATE, DELETE ON huwei_food.Preference TO 'user_general'@'%';
+GRANT SELECT ON huwei_food.recommendation TO 'user_general'@'%';
 
--- 授予普通使用者權限
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.Category TO 'pp99886'@'%';
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.Hours TO 'pp99886'@'%';
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.Restaurant TO 'pp99886'@'%';
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.resCate TO 'pp99886'@'%';
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.Preference TO 'pp99886'@'%';
-GRANT DELETE, INSERT, SELECT, UPDATE ON hfrs.Recommendation TO 'pp99886'@'%';
-GRANT SELECT ON hfrs.MemberCount TO 'pp99886'@'%';
+-- 3. 授權會員使用者查詢view
+GRANT SELECT ON huwei_food.user_preferences TO 'user_general'@'%';
+GRANT SELECT ON huwei_food.open_restaurants TO 'user_general'@'%';
+GRANT SELECT ON huwei_food.recommendation_candidates TO 'user_general'@'%';
+GRANT SELECT ON huwei_food.recent_recommendations TO 'user_general'@'%';
+GRANT SELECT ON huwei_food.restaurant_details TO 'user_general'@'%';
+
+-- 4. 建立餐廳資料管理者帳號
+CREATE USER 'user_admin'@'%' IDENTIFIED BY 'userpassword789';
+
+-- 5. 餐廳資料管理者對 huwei_food 資料庫中的操作權限
+GRANT SELECT, INSERT, UPDATE, DELETE ON huwei_food.category TO 'user_admin'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON huwei_food.restaurant TO 'user_admin'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON huwei_food.rescate TO 'user_admin'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON huwei_food.hours TO 'user_admin'@'%';
+
+-- 6. 授權餐廳資料管理者查詢view
+GRANT SELECT ON huwei_food.admin_statistics TO 'user_general'@'%';
+
+FLUSH PRIVILEGES;
+
 ```
