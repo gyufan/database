@@ -333,7 +333,7 @@ INSERT INTO Hours (rHoursId, day, start_hr, start_min, end_hr, end_min) VALUES
 INSERT INTO Restaurant (rName, rAddress, rPhone, rHoursId, rLink) VALUES
     ('樂飯樂販', '雲林縣虎尾鎮自強街31號', '056310673', 1, 'https://maps.app.goo.gl/4ZT4XMCax78Y1ANt5'),
     ('第8間咖哩', '雲林縣虎尾鎮文化路88號', '056311288', 2, 'https://maps.app.goo.gl/xS93PNQkDyuNdNx9A'),
-    ('虎尾美貞肉羹麵', '雲林縣虎尾鎮中山路23巷2-2號', NULL, 3, 'https://maps.app.goo.gl/29f6CWfwcQXAKyPp9'),
+    ('虎尾美貞肉羹麵', '雲林縣虎尾鎮中山路23巷2-2號', '', 3, 'https://maps.app.goo.gl/29f6CWfwcQXAKyPp9'),
     ('川息拉麵丼飯', '雲林縣虎尾鎮林森路二段111號', '0921794642', 4, 'https://maps.app.goo.gl/ZhUZZnqRQzkYf4YQ9');
 
 -- 店家類別 (resCate) 範例資料
@@ -350,11 +350,6 @@ INSERT INTO Recommendation (mId, rIdA, rIdB, recDate) VALUES
     (2, 5, 79, '2025-04-30'),
     (5, 1, 49, '2025-05-01');
 
--- 會員密碼 (Password) 範例資料
-INSERT INTO Password (mId, mPd) VALUES
-    (1, 'password12345678'),
-    (2, 'securepass987654'),
-    (3, 'myling1234567890');
 ```
 
 ## View SQL
