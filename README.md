@@ -19,9 +19,11 @@
 2. [系統需求說明](#系統需求說明)
 3. [使用案例](#使用案例)
 4. [資料概念層模型](#資料概念層模型)
-5. [資料庫Schema](#資料庫schema)
-6. [View SQL](#view-sql)
-7. [使用者權限SQL](#使用者權限sql)
+5. [ER Diagram](#ER Diagram)
+6. [資料庫Schema](#資料庫schema)
+7. [View SQL](#view-sql)
+8. [使用者權限SQL](#使用者權限sql)
+9. [組員分工與心得](#組員分工與心得)
 
 ## 應用情境
 
