@@ -13,7 +13,6 @@
 
 
 ## 實作Demo
-https://youtu.be/dGoT9NB4sV8  
 https://drive.google.com/drive/folders/1dE6DKWtguK_YtDJdcWRwP2tqN0rkKKVq?usp=sharing
 
 ## 總覽
