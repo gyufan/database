@@ -98,13 +98,13 @@ https://drive.google.com/drive/folders/1dE6DKWtguK_YtDJdcWRwP2tqN0rkKKVq?usp=sha
 #### 1. 會員 (Member) 資料表
 | 欄位名稱     | 說明           | 資料型態         | 是否為空 | 值域                                                                 |
 |--------------|----------------|------------------|----------|----------------------------------------------------------------------|
-| mId          | 會員 ID        | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
-| mName        | 姓名           | VARCHAR(12)      | N        | 2~12 字元，限中文字或英文字母 |
-| mAccount     | 帳號           | VARCHAR(20)      | N        | 6~20 字元，限英文與數字組合       |
-| mEmail       | 電子郵件       | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
-| mPhone       | 手機           | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字 |
-| mAddress     | 地址           | VARCHAR(64)      | Y        | 最長 64 字元的文字                                                |
-| mCreateDate  | 建立日期       | DATE             | N        | 格式為 yyyy-mm-dd ，未設定時自動填入當前系統日期    |
+| mId          | 會員 ID         | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| mName        | 姓名            | VARCHAR(12)      | N        | 2~12 字元，限中文字或英文字母 |
+| mAccount     | 帳號            | VARCHAR(20)      | N        | 6~20 字元，限英文與數字組合       |
+| mEmail       | 電子郵件        | VARCHAR(50)      | N        | Email 格式， '^[a-zA-Z0-9.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' |
+| mPhone       | 手機            | CHAR(10)         | Y        | 台灣手機格式，以 09 開頭後面接 8 個數字 |
+| mAddress     | 地址            | VARCHAR(64)      | Y        | 最長 64 字元的文字                                                |
+| mCreateDate  | 建立日期        | DATE             | N        | 格式為 yyyy-mm-dd ，未設定時自動填入當前系統日期    |
 
 #### 2. 喜好類別 (Category) 資料表
 | 欄位名稱 | 說明         | 資料型態     | 是否為空 | 值域                                                                 |
@@ -124,13 +124,13 @@ https://drive.google.com/drive/folders/1dE6DKWtguK_YtDJdcWRwP2tqN0rkKKVq?usp=sha
 
 #### 4. 餐廳 (Restaurant) 資料表
 | 欄位名稱   | 說明           | 資料型態         | 是否為空 | 值域                                                                 |
-|--------------|----------------|------------------|----------|----------------------------------------------------------------------|
-| rId        | 店家 ID        | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
-| rName      | 店名           | VARCHAR(30)      | N        | 1~30 字元，中文或英文皆可                                |
-| rAddress   | 地址           | VARCHAR(64)      | N        | 最長 64 字元的文字                                             |
-| rPhone     | 店家電話       | VARCHAR(10)         | Y        |  056 開頭後面 6 個數字的虎尾市話 或 09 開頭後面 8 個數字的行動電話          |
-| rHoursId   | 營業時間 ID    | INT              | Y        | 參考 hours.rHoursId                     |
-| rLink      | GoogleMap連結  | VARCHAR(100)     | Y        | URL 格式，含 https://maps.app.goo.gl/ + 英文與數字的組合  |
+|--------------|------------------|------------------|----------|----------------------------------------------------------------------|
+| rId        | 店家 ID          | INT AUTO_INCREMENT | N        | 主鍵，自動遞增                                                     |
+| rName      | 店名             | VARCHAR(30)      | N        | 1~30 字元，中文或英文皆可                                |
+| rAddress   | 地址             | VARCHAR(64)      | N        | 最長 64 字元的文字                                             |
+| rPhone     | 店家電話         | VARCHAR(10)         | Y        |  056 開頭後面 6 個數字的虎尾市話 或 09 開頭後面 8 個數字的行動電話          |
+| rHoursId   | 營業時間 ID      | INT              | Y        | 參考 hours.rHoursId                     |
+| rLink      | GoogleMap連結    | VARCHAR(100)     | Y        | URL 格式，含 https://maps.app.goo.gl/ + 英文與數字的組合  |
 
 #### 5. 店家類別對應表 (resCate)
 | 欄位名稱 | 說明       | 資料型態 | 是否為空 | 值域                                              |
