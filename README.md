@@ -13,7 +13,8 @@
 
 
 ## 實作Demo
-https://youtu.be/dGoT9NB4sV8
+https://youtu.be/dGoT9NB4sV8  
+https://drive.google.com/drive/folders/1dE6DKWtguK_YtDJdcWRwP2tqN0rkKKVq?usp=sharing
 
 ## 總覽
 虎尾美食推薦系統旨在幫助使用者根據個人喜好尋找虎尾地區的合適餐廳。使用者可以註冊、登入、選擇喜好類別，並接收個人化的餐廳推薦。管理員可以管理餐廳資訊、喜好類別，並查看會員數量統計，但無法存取個人用戶資料。
